@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agentic AI - Employee Onboarding System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <div class="logo">
+          <span class="logo-icon">&#9670;</span>
+          <span>AgentFlow</span>
+        </div>
+        <span class="header-subtitle">Agentic AI Onboarding</span>
+      </div>
+      <nav class="header-nav">
+        <button class="nav-btn active" data-view="home">Dashboard</button>
+        <button class="nav-btn" data-view="new">+ New Employee</button>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+      <!-- HOME VIEW -->
+      <section id="view-home" class="view active">
+        <div class="hero">
+          <h1>Agentic AI Employee Onboarding</h1>
+          <p>Multi-agent system that autonomously orchestrates the entire onboarding workflow — from HR documents and IT provisioning to personalized training and buddy matching.</p>
+          <div class="agent-badges">
+            <span class="badge badge-hr">HR Agent</span>
+            <span class="badge badge-it">IT Agent</span>
+            <span class="badge badge-training">Training Agent</span>
+            <span class="badge badge-buddy">Buddy Agent</span>
+            <span class="badge badge-orchestrator">Orchestrator</span>
+          </div>
+        </div>
+
+        <div class="stats-row" id="global-stats">
+          <div class="stat-card">
+            <div class="stat-number" id="stat-total">0</div>
+            <div class="stat-label">Employees Onboarded</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="stat-tasks">0</div>
+            <div class="stat-label">Tasks Generated</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="stat-completed">0</div>
+            <div class="stat-label">Tasks Completed</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="stat-agents">4</div>
+            <div class="stat-label">Active Agents</div>
+          </div>
+        </div>
+
+        <div class="section-header">
+          <h2>Recent Onboarding</h2>
+        </div>
+        <div id="employee-list" class="employee-list">
+          <div class="empty-state">
+            <div class="empty-icon">&#128101;</div>
+            <p>No employees onboarded yet.</p>
+            <button class="btn btn-primary" onclick="showView('new')">Onboard First Employee</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- NEW EMPLOYEE FORM VIEW -->
+      <section id="view-new" class="view">
+        <div class="form-container">
+          <h2>Onboard New Employee</h2>
+          <p class="form-subtitle">Enter employee details. The AI agents will autonomously generate a complete onboarding plan.</p>
+          <form id="onboard-form">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="firstName">First Name *</label>
+                <input type="text" id="firstName" required placeholder="Jane">
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name *</label>
+                <input type="text" id="lastName" required placeholder="Smith">
+              </div>
+              <div class="form-group">
+                <label for="department">Department *</label>
+                <select id="department" required>
+                  <option value="">Select department</option>
+                  <option value="engineering">Engineering</option>
+                  <option value="design">Design</option>
+                  <option value="product">Product</option>
+                  <option value="sales">Sales</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="role">Role / Title</label>
+                <input type="text" id="role" placeholder="Senior Software Engineer">
+              </div>
+              <div class="form-group">
+                <label for="startDate">Start Date</label>
+                <input type="date" id="startDate">
+              </div>
+              <div class="form-group">
+                <label for="manager">Manager</label>
+                <input type="text" id="manager" placeholder="John Doe">
+              </div>
+              <div class="form-group">
+                <label for="location">Location</label>
+                <select id="location">
+                  <option value="Remote">Remote</option>
+                  <option value="New York">New York</option>
+                  <option value="San Francisco">San Francisco</option>
+                  <option value="London">London</option>
+                  <option value="Hybrid">Hybrid</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg" id="submit-btn">
+              <span class="btn-text">Launch Onboarding Agents</span>
+              <span class="btn-loading" style="display:none">
+                <span class="spinner"></span> Agents Working...
+              </span>
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- ONBOARDING RESULT VIEW -->
+      <section id="view-result" class="view">
+        <div id="result-content"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
