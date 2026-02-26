@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Orchestrator = require('../agents/orchestrator');
+const clfModel = require('../models/clf');
 const {
   createEmployee,
   getEmployee,
@@ -104,6 +105,17 @@ router.patch('/employees/:id/tasks/:taskId', (req, res) => {
   }
 
   res.json({ success: true, task });
+});
+
+/**
+ * POST /api/classify
+ * Classify an employee profile without starting full onboarding.
+ * Useful for previewing the tier, risk level, and recommended focus areas.
+ * Body: { firstName, lastName, department, role, startDate, manager, location, email }
+ */
+router.post('/classify', (req, res) => {
+  const result = clfModel.classify(req.body);
+  res.json(result);
 });
 
 module.exports = router;

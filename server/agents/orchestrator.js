@@ -2,6 +2,7 @@ const HRAgent = require('./hr-agent');
 const ITSetupAgent = require('./it-setup-agent');
 const TrainingAgent = require('./training-agent');
 const BuddyAgent = require('./buddy-agent');
+const clfModel = require('../models/clf');
 
 /**
  * Orchestrator – the master agent that coordinates the entire onboarding
@@ -26,6 +27,11 @@ class Orchestrator {
   /** Run all agents and produce a complete onboarding plan. */
   async onboard(employeeData) {
     const startTime = Date.now();
+
+    // Classify the employee before running agents so the result is available
+    // throughout the plan and agents can adapt accordingly.
+    const classification = clfModel.classify(employeeData);
+
     const context = {
       employee: {
         ...employeeData,
@@ -34,6 +40,7 @@ class Orchestrator {
         accounts: employeeData.accounts || [],
         hardware: employeeData.hardware || [],
         onboardingStarted: new Date().toISOString(),
+        classification,
       },
     };
 
@@ -79,6 +86,7 @@ class Orchestrator {
 
     return {
       employee: context.employee,
+      classification,
       summary,
       agentLogs,
       timeline: this.buildTimeline(mergedTasks),
@@ -106,6 +114,7 @@ class Orchestrator {
     return {
       employeeName: `${context.employee.firstName} ${context.employee.lastName}`,
       department: context.employee.department,
+      classification: context.employee.classification,
       totalTasks: tasks.length,
       completed,
       inProgress,
