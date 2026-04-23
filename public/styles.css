@@ -47,7 +47,8 @@ body {
 /* === SIDEBAR === */
 .sidebar {
   width: var(--sidebar-w);
-  background: #1e1b4b;
+  background: var(--white);
+  border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   padding: 24px 16px;
@@ -73,8 +74,8 @@ body {
   flex-shrink: 0;
 }
 
-.logo-name { font-weight: 700; color: white; font-size: 16px; line-height: 1.2; }
-.logo-tagline { font-size: 11px; color: rgba(255,255,255,0.4); }
+.logo-name { font-weight: 700; color: var(--text); font-size: 16px; line-height: 1.2; }
+.logo-tagline { font-size: 11px; color: var(--text-muted); }
 
 /* Sidebar nav */
 .sidebar-nav { display: flex; flex-direction: column; gap: 4px; }
@@ -85,7 +86,7 @@ body {
   border-radius: var(--radius-sm);
   border: none;
   background: transparent;
-  color: rgba(255,255,255,0.55);
+  color: var(--text-muted);
   font-size: 14px; font-weight: 500;
   cursor: pointer;
   text-align: left;
@@ -93,8 +94,8 @@ body {
   width: 100%;
 }
 
-.nav-item:hover { background: rgba(255,255,255,0.08); color: white; }
-.nav-item.active { background: rgba(99,102,241,0.25); color: white; }
+.nav-item:hover { background: var(--bg); color: var(--text); }
+.nav-item.active { background: var(--primary-light); color: var(--primary); }
 
 .nav-icon { font-size: 16px; width: 20px; text-align: center; }
 
@@ -102,12 +103,12 @@ body {
 .sidebar-agents {
   margin-top: 32px;
   padding-top: 24px;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid var(--border);
 }
 
 .agents-label {
   font-size: 11px; font-weight: 600;
-  color: rgba(255,255,255,0.35);
+  color: var(--text-light);
   text-transform: uppercase; letter-spacing: 0.08em;
   margin-bottom: 10px; padding: 0 4px;
 }
@@ -118,7 +119,7 @@ body {
   border-radius: 6px;
   font-size: 13px; font-weight: 500;
   margin-bottom: 4px;
-  color: rgba(255,255,255,0.65);
+  color: var(--text-muted);
 }
 
 .agent-pill .dot {
@@ -141,11 +142,11 @@ body {
 .sidebar-footer {
   margin-top: auto;
   padding-top: 16px;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid var(--border);
 }
 
 .sidebar-footer-text {
-  font-size: 11px; color: rgba(255,255,255,0.25);
+  font-size: 11px; color: var(--text-light);
   text-align: center;
 }
 
