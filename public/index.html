@@ -3,136 +3,233 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agentic AI - Employee Onboarding System</title>
+  <title>AgentFlow – AI Employee Onboarding</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div id="app">
-    <!-- Header -->
-    <header class="header">
-      <div class="header-left">
-        <div class="logo">
-          <span class="logo-icon">&#9670;</span>
-          <span>AgentFlow</span>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-mark">AF</div>
+        <div>
+          <div class="logo-name">AgentFlow</div>
+          <div class="logo-tagline">AI Onboarding</div>
         </div>
-        <span class="header-subtitle">Agentic AI Onboarding</span>
       </div>
-      <nav class="header-nav">
-        <button class="nav-btn active" data-view="home">Dashboard</button>
-        <button class="nav-btn" data-view="new">+ New Employee</button>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-view="home">
+          <span class="nav-icon">⊞</span>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-item" data-view="new">
+          <span class="nav-icon">＋</span>
+          <span>New Employee</span>
+        </button>
       </nav>
-    </header>
+
+      <div class="sidebar-agents">
+        <div class="agents-label">Active Agents</div>
+        <div class="agent-pill agent-hr">
+          <span class="dot"></span> HR Agent
+        </div>
+        <div class="agent-pill agent-it">
+          <span class="dot"></span> IT Setup Agent
+        </div>
+        <div class="agent-pill agent-training">
+          <span class="dot"></span> Training Agent
+        </div>
+        <div class="agent-pill agent-buddy">
+          <span class="dot"></span> Buddy Agent
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-footer-text">Powered by ReAct Agents</div>
+      </div>
+    </aside>
 
     <!-- Main Content -->
-    <main class="main">
-      <!-- HOME VIEW -->
+    <div class="content">
+
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-title" id="topbar-title">Dashboard</div>
+        <button class="topbar-cta" data-view="new" onclick="showView('new')">
+          <span>＋</span> Onboard Employee
+        </button>
+      </header>
+
+      <!-- DASHBOARD VIEW -->
       <section id="view-home" class="view active">
-        <div class="hero">
-          <h1>Agentic AI Employee Onboarding</h1>
-          <p>Multi-agent system that autonomously orchestrates the entire onboarding workflow — from HR documents and IT provisioning to personalized training and buddy matching.</p>
-          <div class="agent-badges">
-            <span class="badge badge-hr">HR Agent</span>
-            <span class="badge badge-it">IT Agent</span>
-            <span class="badge badge-training">Training Agent</span>
-            <span class="badge badge-buddy">Buddy Agent</span>
-            <span class="badge badge-orchestrator">Orchestrator</span>
+        <!-- Stats -->
+        <div class="stats-grid" id="global-stats">
+          <div class="stat-card accent-purple">
+            <div class="stat-icon">👥</div>
+            <div class="stat-body">
+              <div class="stat-number" id="stat-total">0</div>
+              <div class="stat-label">Employees Onboarded</div>
+            </div>
+          </div>
+          <div class="stat-card accent-blue">
+            <div class="stat-icon">📋</div>
+            <div class="stat-body">
+              <div class="stat-number" id="stat-tasks">0</div>
+              <div class="stat-label">Tasks Generated</div>
+            </div>
+          </div>
+          <div class="stat-card accent-green">
+            <div class="stat-icon">✅</div>
+            <div class="stat-body">
+              <div class="stat-number" id="stat-completed">0</div>
+              <div class="stat-label">Tasks Completed</div>
+            </div>
+          </div>
+          <div class="stat-card accent-orange">
+            <div class="stat-icon">🤖</div>
+            <div class="stat-body">
+              <div class="stat-number" id="stat-agents">4</div>
+              <div class="stat-label">Active Agents</div>
+            </div>
           </div>
         </div>
 
-        <div class="stats-row" id="global-stats">
-          <div class="stat-card">
-            <div class="stat-number" id="stat-total">0</div>
-            <div class="stat-label">Employees Onboarded</div>
+        <!-- How it works -->
+        <div class="section-card" id="how-it-works-card">
+          <div class="section-card-header">
+            <h2>How It Works</h2>
           </div>
-          <div class="stat-card">
-            <div class="stat-number" id="stat-tasks">0</div>
-            <div class="stat-label">Tasks Generated</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number" id="stat-completed">0</div>
-            <div class="stat-label">Tasks Completed</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number" id="stat-agents">4</div>
-            <div class="stat-label">Active Agents</div>
+          <div class="how-grid">
+            <div class="how-step">
+              <div class="how-number">1</div>
+              <div class="how-text">
+                <strong>Enter employee details</strong>
+                <p>Name, department, role, start date</p>
+              </div>
+            </div>
+            <div class="how-arrow">→</div>
+            <div class="how-step">
+              <div class="how-number">2</div>
+              <div class="how-text">
+                <strong>Orchestrator fires agents</strong>
+                <p>4 AI agents run concurrently</p>
+              </div>
+            </div>
+            <div class="how-arrow">→</div>
+            <div class="how-step">
+              <div class="how-number">3</div>
+              <div class="how-text">
+                <strong>Plan is generated</strong>
+                <p>Tasks, timeline & buddy assigned</p>
+              </div>
+            </div>
+            <div class="how-arrow">→</div>
+            <div class="how-step">
+              <div class="how-number">4</div>
+              <div class="how-text">
+                <strong>Track progress</strong>
+                <p>Mark tasks complete as you go</p>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="section-header">
-          <h2>Recent Onboarding</h2>
-        </div>
-        <div id="employee-list" class="employee-list">
-          <div class="empty-state">
-            <div class="empty-icon">&#128101;</div>
-            <p>No employees onboarded yet.</p>
-            <button class="btn btn-primary" onclick="showView('new')">Onboard First Employee</button>
+        <!-- Employee list -->
+        <div class="section-card">
+          <div class="section-card-header">
+            <h2>Recent Onboarding</h2>
           </div>
+          <div id="employee-list"></div>
         </div>
       </section>
 
-      <!-- NEW EMPLOYEE FORM VIEW -->
+      <!-- NEW EMPLOYEE VIEW -->
       <section id="view-new" class="view">
-        <div class="form-container">
-          <h2>Onboard New Employee</h2>
-          <p class="form-subtitle">Enter employee details. The AI agents will autonomously generate a complete onboarding plan.</p>
-          <form id="onboard-form">
+        <div class="form-page">
+          <div class="form-header">
+            <h2>Onboard a New Employee</h2>
+            <p>Fill in the details below. The AI orchestrator will instantly generate a complete, role-specific onboarding plan.</p>
+          </div>
+
+          <form id="onboard-form" class="form-card">
+            <div class="form-section-title">Personal Information</div>
             <div class="form-grid">
               <div class="form-group">
-                <label for="firstName">First Name *</label>
-                <input type="text" id="firstName" required placeholder="Jane">
+                <label for="firstName">First Name <span class="required">*</span></label>
+                <input type="text" id="firstName" required placeholder="e.g. Jane">
               </div>
               <div class="form-group">
-                <label for="lastName">Last Name *</label>
-                <input type="text" id="lastName" required placeholder="Smith">
+                <label for="lastName">Last Name <span class="required">*</span></label>
+                <input type="text" id="lastName" required placeholder="e.g. Smith">
               </div>
+            </div>
+
+            <div class="form-section-title">Role Details</div>
+            <div class="form-grid">
               <div class="form-group">
-                <label for="department">Department *</label>
+                <label for="department">Department <span class="required">*</span></label>
                 <select id="department" required>
-                  <option value="">Select department</option>
-                  <option value="engineering">Engineering</option>
-                  <option value="design">Design</option>
-                  <option value="product">Product</option>
-                  <option value="sales">Sales</option>
+                  <option value="">Select a department</option>
+                  <option value="engineering">🛠 Engineering</option>
+                  <option value="design">🎨 Design</option>
+                  <option value="product">📦 Product</option>
+                  <option value="sales">💼 Sales</option>
                 </select>
               </div>
               <div class="form-group">
-                <label for="role">Role / Title</label>
-                <input type="text" id="role" placeholder="Senior Software Engineer">
+                <label for="role">Job Title</label>
+                <input type="text" id="role" placeholder="e.g. Senior Software Engineer">
+              </div>
+              <div class="form-group">
+                <label for="manager">Reporting Manager</label>
+                <input type="text" id="manager" placeholder="e.g. John Doe">
               </div>
               <div class="form-group">
                 <label for="startDate">Start Date</label>
                 <input type="date" id="startDate">
               </div>
               <div class="form-group">
-                <label for="manager">Manager</label>
-                <input type="text" id="manager" placeholder="John Doe">
-              </div>
-              <div class="form-group">
-                <label for="location">Location</label>
+                <label for="location">Work Location</label>
                 <select id="location">
-                  <option value="Remote">Remote</option>
-                  <option value="New York">New York</option>
-                  <option value="San Francisco">San Francisco</option>
-                  <option value="London">London</option>
-                  <option value="Hybrid">Hybrid</option>
+                  <option value="Remote">🌐 Remote</option>
+                  <option value="New York">🗽 New York</option>
+                  <option value="San Francisco">🌉 San Francisco</option>
+                  <option value="London">🇬🇧 London</option>
+                  <option value="Hybrid">🏠 Hybrid</option>
                 </select>
               </div>
             </div>
-            <button type="submit" class="btn btn-primary btn-lg" id="submit-btn">
-              <span class="btn-text">Launch Onboarding Agents</span>
-              <span class="btn-loading" style="display:none">
-                <span class="spinner"></span> Agents Working...
-              </span>
-            </button>
+
+            <div class="form-footer">
+              <div class="agents-preview">
+                <span class="agents-preview-label">Will activate:</span>
+                <span class="chip chip-hr">HR Agent</span>
+                <span class="chip chip-it">IT Agent</span>
+                <span class="chip chip-training">Training Agent</span>
+                <span class="chip chip-buddy">Buddy Agent</span>
+              </div>
+              <button type="submit" class="btn-launch" id="submit-btn">
+                <span class="btn-text">🚀 Launch Onboarding Agents</span>
+                <span class="btn-loading" style="display:none">
+                  <span class="spinner"></span> Agents running...
+                </span>
+              </button>
+            </div>
           </form>
         </div>
       </section>
 
-      <!-- ONBOARDING RESULT VIEW -->
+      <!-- RESULT VIEW -->
       <section id="view-result" class="view">
         <div id="result-content"></div>
       </section>
-    </main>
+
+    </div>
   </div>
 
   <script src="app.js"></script>
