@@ -436,7 +436,8 @@ body {
 .result-back-btn:hover { border-color: var(--text-muted); }
 
 .result-hero {
-  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+  background: var(--primary-light);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 28px 32px;
   margin-bottom: 24px;
@@ -445,14 +446,14 @@ body {
 }
 
 .result-hero-left h2 {
-  font-size: 26px; font-weight: 800; color: white; margin-bottom: 4px;
+  font-size: 26px; font-weight: 800; color: var(--text); margin-bottom: 4px;
 }
 
 .result-dept-badge {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 5px 14px; border-radius: 20px;
-  background: rgba(255,255,255,0.15);
-  color: rgba(255,255,255,0.9);
+  background: var(--white);
+  color: var(--primary);
   font-size: 13px; font-weight: 600;
 }
 
@@ -461,14 +462,14 @@ body {
 }
 
 .result-mini-stat {
-  background: rgba(255,255,255,0.1);
+  background: var(--white);
   border-radius: var(--radius-sm);
   padding: 10px 16px; text-align: center;
   min-width: 80px;
 }
 
-.result-mini-stat .mn { font-size: 22px; font-weight: 800; color: white; }
-.result-mini-stat .ml { font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 1px; }
+.result-mini-stat .mn { font-size: 22px; font-weight: 800; color: var(--primary); }
+.result-mini-stat .ml { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
 
 /* Agent cards */
 .agents-grid {

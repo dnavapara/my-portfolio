@@ -206,19 +206,19 @@ function renderResult({ plan, employeeId }) {
           <div class="ml">Total Tasks</div>
         </div>
         <div class="result-mini-stat">
-          <div class="mn" style="color:#86efac">${summary.completed}</div>
+          <div class="mn" style="color:var(--green)">${summary.completed}</div>
           <div class="ml">Auto-Done</div>
         </div>
         <div class="result-mini-stat">
-          <div class="mn" style="color:#93c5fd">${summary.inProgress}</div>
+          <div class="mn" style="color:var(--blue)">${summary.inProgress}</div>
           <div class="ml">In Progress</div>
         </div>
         <div class="result-mini-stat">
-          <div class="mn" style="color:#fde68a">${summary.pending}</div>
+          <div class="mn" style="color:var(--orange)">${summary.pending}</div>
           <div class="ml">Pending</div>
         </div>
         <div class="result-mini-stat">
-          <div class="mn" style="color:#c4b5fd">${summary.orchestrationTimeMs}ms</div>
+          <div class="mn" style="color:var(--purple)">${summary.orchestrationTimeMs}ms</div>
           <div class="ml">Agent Time</div>
         </div>
       </div>
