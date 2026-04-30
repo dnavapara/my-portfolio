@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Trainer Agent</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-icon">🏋️</div>
+    <h1>Personal <span>Trainer Agent</span></h1>
+    <p>AI-powered workouts built from your Apple Health data — sleep, recovery, activity & training history</p>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- ── Upload View ── -->
+  <section id="view-upload" class="view active">
+    <div class="upload-view-inner">
+      <h2>Upload Your Health Data</h2>
+      <p class="subtitle">Your data is processed locally and never stored permanently</p>
+
+      <div class="upload-zone" id="drop-zone">
+        <div class="upload-icon">📁</div>
+        <strong>Drop your Apple Health export here</strong>
+        <p>or click to browse for <code>export.xml</code></p>
+        <p class="file-hint">Export from: Health app → Profile → Export All Health Data</p>
+        <input type="file" id="file-input" accept=".xml" style="display:none" />
+      </div>
+
+      <div class="upload-divider">or</div>
+
+      <button class="btn btn-demo" id="demo-btn">
+        ⚡ Try Demo Data
+      </button>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feat-icon">😴</div>
+          <h4>Sleep Analysis</h4>
+          <p>7-night deep sleep, REM cycles, sleep debt & consistency score</p>
+        </div>
+        <div class="feature-card">
+          <div class="feat-icon">💓</div>
+          <h4>Recovery & HRV</h4>
+          <p>Heart rate variability trend vs baseline and resting HR readiness</p>
+        </div>
+        <div class="feature-card">
+          <div class="feat-icon">🏃</div>
+          <h4>Daily Activity</h4>
+          <p>Steps, active calories, exercise minutes vs your 7-day average</p>
+        </div>
+        <div class="feature-card">
+          <div class="feat-icon">📊</div>
+          <h4>Workout History</h4>
+          <p>14-day training patterns, muscle group gaps & overtraining risk</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Loading View ── -->
+  <section id="view-loading" class="view">
+    <div class="loading-header">
+      <h2>Analyzing Your Health Data</h2>
+      <p>Four AI agents are processing your metrics in parallel…</p>
+    </div>
+
+    <div class="agent-grid">
+      <div class="agent-card" id="card-sleep">
+        <div class="status-dot pending" id="dot-sleep"></div>
+        <div class="agent-info">
+          <h4>😴 Sleep Analysis</h4>
+          <p>Scoring 7-night sleep quality, deep sleep %, and sleep debt</p>
+          <div class="agent-status-label" id="label-sleep">Pending</div>
+        </div>
+      </div>
+      <div class="agent-card" id="card-recovery">
+        <div class="status-dot pending" id="dot-recovery"></div>
+        <div class="agent-info">
+          <h4>💓 Recovery Agent</h4>
+          <p>Evaluating HRV trend vs baseline and resting heart rate</p>
+          <div class="agent-status-label" id="label-recovery">Pending</div>
+        </div>
+      </div>
+      <div class="agent-card" id="card-activity">
+        <div class="status-dot pending" id="dot-activity"></div>
+        <div class="agent-info">
+          <h4>🏃 Activity Agent</h4>
+          <p>Calculating steps, calories, and exercise load vs averages</p>
+          <div class="agent-status-label" id="label-activity">Pending</div>
+        </div>
+      </div>
+      <div class="agent-card" id="card-workoutHistory">
+        <div class="status-dot pending" id="dot-workoutHistory"></div>
+        <div class="agent-info">
+          <h4>📊 Workout History</h4>
+          <p>Detecting muscle group gaps and overtraining patterns</p>
+          <div class="agent-status-label" id="label-workoutHistory">Pending</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="claude-banner" id="claude-banner">
+      <div class="spinner"></div>
+      <p><strong>Claude is generating your personalized workout plan</strong><br>Using claude-sonnet-4-6 to craft a science-based recommendation from all agent findings…</p>
+    </div>
+  </section>
+
+  <!-- ── Results View ── -->
+  <section id="view-results" class="view">
+    <div class="results-header">
+      <h2>Your Personalized Workout Plan</h2>
+      <p id="results-subtitle">Generated from your Apple Health biometrics</p>
+    </div>
+
+    <!-- Metric scores -->
+    <div class="metrics-row">
+      <div class="metric-card">
+        <div class="metric-label">Sleep Score</div>
+        <div class="metric-score" id="score-sleep">—</div>
+        <div class="metric-sub" id="sub-sleep"></div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Recovery</div>
+        <div class="metric-score" id="score-recovery">—</div>
+        <div class="metric-sub" id="sub-recovery"></div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Activity Load</div>
+        <div class="metric-score" id="score-activity">—</div>
+        <div class="metric-sub" id="sub-activity"></div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Workouts (14d)</div>
+        <div class="metric-score" id="score-history">—</div>
+        <div class="metric-sub" id="sub-history"></div>
+      </div>
+    </div>
+
+    <!-- Workout plan -->
+    <div class="workout-card" id="workout-card">
+      <div class="workout-card-header">
+        <span class="workout-type-badge" id="workout-badge"></span>
+        <div class="workout-meta">
+          <span class="workout-duration"><strong id="workout-duration"></strong> min</span>
+          <div class="intensity-wrap">
+            <span class="intensity-label" id="intensity-label"></span>
+            <div class="intensity-track">
+              <div class="intensity-fill" id="intensity-fill"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="workout-card-body">
+
+        <div id="warnings-container"></div>
+
+        <div class="section-title">Exercises</div>
+        <table class="exercise-table">
+          <thead>
+            <tr>
+              <th>Exercise</th>
+              <th>Sets</th>
+              <th>Reps / Duration</th>
+              <th>Muscle Group</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody id="exercises-body"></tbody>
+        </table>
+
+        <div class="wc-grid">
+          <div>
+            <div class="section-title">Warm-up</div>
+            <ul class="wc-list" id="warmup-list"></ul>
+          </div>
+          <div>
+            <div class="section-title">Cool-down</div>
+            <ul class="wc-list" id="cooldown-list"></ul>
+          </div>
+        </div>
+
+        <div class="section-title">Claude's Reasoning</div>
+        <div class="reasoning-box" id="reasoning-box"></div>
+
+      </div>
+    </div>
+
+    <!-- Agent logs -->
+    <div class="agent-logs">
+      <div class="section-title">Agent Execution Logs</div>
+      <div class="logs-grid" id="logs-grid"></div>
+    </div>
+
+    <div class="results-actions">
+      <button class="btn btn-primary" id="new-plan-btn">↺ Analyze New Data</button>
+    </div>
+  </section>
+
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
